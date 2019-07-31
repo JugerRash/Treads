@@ -60,6 +60,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nmg-j2-BYE">
                                 <rect key="frame" x="292" y="406" width="58" height="58"/>
                                 <state key="normal" image="centerNavButton"/>
+                                <connections>
+                                    <action selector="centerUserLocationBtnPressed:" destination="9pv-A4-QxB" eventType="touchUpInside" id="wNa-6w-gMQ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -84,15 +87,18 @@
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Run" image="tabbar-runIcon" selectedImage="tabbar-runIcon" id="acW-dT-cKf"/>
+                    <connections>
+                        <outlet property="mapView" destination="vHC-tn-kMp" id="OS2-LG-sIH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
         </scene>
-        <!--On RunVC-->
+        <!--Current RunVC-->
         <scene sceneID="I0k-37-TfV">
             <objects>
-                <viewController id="ijI-Nk-kDC" customClass="OnRunVC" customModule="Treads" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ijI-Nk-kDC" customClass="CurrentRunVC" customModule="Treads" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Djf-E0-wsd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -212,6 +218,10 @@
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="sliderImageView" destination="JW8-Q4-Udx" id="oQu-hD-6gw"/>
+                        <outlet property="swipeBGImageView" destination="vSR-Jw-40h" id="BNa-ZE-1Xv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rxd-qQ-tAY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -33,7 +33,8 @@
 		3510FC3022E73DC9008E04CE /* Montserrat-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3510FC1E22E73DC9008E04CE /* Montserrat-ThinItalic.ttf */; };
 		3561E1EF22EAF6DE00A6B3E7 /* LogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3561E1EE22EAF6DE00A6B3E7 /* LogCell.swift */; };
 		3561E1F122EAF82700A6B3E7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3561E1F022EAF82700A6B3E7 /* Constants.swift */; };
-		3561E1F322EB22A200A6B3E7 /* OnRunVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3561E1F222EB22A200A6B3E7 /* OnRunVC.swift */; };
+		3561E1F322EB22A200A6B3E7 /* CurrentRunVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3561E1F222EB22A200A6B3E7 /* CurrentRunVC.swift */; };
+		3599F3DC22F18CE800EA7DC1 /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3599F3DB22F18CE800EA7DC1 /* LocationVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,7 +66,8 @@
 		3510FC1E22E73DC9008E04CE /* Montserrat-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ThinItalic.ttf"; sourceTree = "<group>"; };
 		3561E1EE22EAF6DE00A6B3E7 /* LogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCell.swift; sourceTree = "<group>"; };
 		3561E1F022EAF82700A6B3E7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		3561E1F222EB22A200A6B3E7 /* OnRunVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnRunVC.swift; sourceTree = "<group>"; };
+		3561E1F222EB22A200A6B3E7 /* CurrentRunVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentRunVC.swift; sourceTree = "<group>"; };
+		3599F3DB22F18CE800EA7DC1 /* LocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +120,8 @@
 			children = (
 				3510FBF522E73A3A008E04CE /* BeginRunVC.swift */,
 				3510FBF722E73A3A008E04CE /* RunLogVC.swift */,
-				3561E1F222EB22A200A6B3E7 /* OnRunVC.swift */,
+				3561E1F222EB22A200A6B3E7 /* CurrentRunVC.swift */,
+				3599F3DB22F18CE800EA7DC1 /* LocationVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -267,8 +270,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3599F3DC22F18CE800EA7DC1 /* LocationVC.swift in Sources */,
 				3561E1F122EAF82700A6B3E7 /* Constants.swift in Sources */,
-				3561E1F322EB22A200A6B3E7 /* OnRunVC.swift in Sources */,
+				3561E1F322EB22A200A6B3E7 /* CurrentRunVC.swift in Sources */,
 				3510FBF822E73A3A008E04CE /* RunLogVC.swift in Sources */,
 				3510FBF422E73A3A008E04CE /* AppDelegate.swift in Sources */,
 				3561E1EF22EAF6DE00A6B3E7 /* LogCell.swift in Sources */,
