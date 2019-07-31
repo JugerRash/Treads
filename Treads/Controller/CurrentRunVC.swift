@@ -22,7 +22,9 @@ class CurrentRunVC: LocationVC , UIGestureRecognizerDelegate {
     //Variables -:
     var firstLocation : CLLocation!
     var lastLocation : CLLocation!
+    var timer = Timer()
     var runDistance  = 0.0
+    var counter = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,9 +50,18 @@ class CurrentRunVC: LocationVC , UIGestureRecognizerDelegate {
     // Functions -:
     func startRun(){
         manager?.startUpdatingLocation()
+        startTimer()
     }
     func endRun(){
        manager?.stopUpdatingLocation()
+    }
+    func startTimer(){
+        durationLbl.text = counter.formatingTimeSecondsToHours()
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCounter), userInfo: nil, repeats: true)
+    }
+    @objc func timeCounter(){
+        counter += 1
+        durationLbl.text = counter.formatingTimeSecondsToHours()
     }
     @IBAction func pauseBtnPressed(_ sender: Any) {
     }
