@@ -7,12 +7,22 @@
 //
 
 import UIKit
+import MapKit
 
 class CurrentRunVC: LocationVC , UIGestureRecognizerDelegate {
 
     // Outlets -:
     @IBOutlet weak var swipeBGImageView: UIImageView!
     @IBOutlet weak var sliderImageView: UIImageView!
+    @IBOutlet weak var durationLbl: UILabel!
+    @IBOutlet weak var paceLbl: UILabel!
+    @IBOutlet weak var distanceLbl: UILabel!
+    @IBOutlet weak var pauseBtn: UIButton!
+    
+    //Variables -:
+    var firstLocation : CLLocation!
+    var lastLocation : CLLocation!
+    var runDistance  = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +32,28 @@ class CurrentRunVC: LocationVC , UIGestureRecognizerDelegate {
         swipeGesture.delegate = self
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        checkLocationAuthStatus()
+        manager?.delegate = self
+        manager?.distanceFilter = 10 // every 10 meters will update the map or location
+        startRun()
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        endRun()
+    }
+    
     
     // Functions -:
+    func startRun(){
+        manager?.startUpdatingLocation()
+    }
+    func endRun(){
+       manager?.stopUpdatingLocation()
+    }
+    @IBAction func pauseBtnPressed(_ sender: Any) {
+    }
     @objc func endRunSwipe(_ sender : UIPanGestureRecognizer){
         // wee need two points for the beginning and the endding of the swipe
         let minAdjust : CGFloat = 80
@@ -50,4 +80,22 @@ class CurrentRunVC: LocationVC , UIGestureRecognizerDelegate {
         }
     }
     
+}
+
+extension CurrentRunVC : CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            checkLocationAuthStatus()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if firstLocation == nil {
+            firstLocation = locations.first
+        }else if let location = locations.last {
+            runDistance += lastLocation.distance(from: location)
+            distanceLbl.text = "\(runDistance.metersToMiles(places: 2))"
+        }
+        lastLocation = locations.last
+    }
 }
