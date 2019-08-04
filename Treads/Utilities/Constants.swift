@@ -11,3 +11,7 @@ import Foundation
 
 // CELLLS
 let LOG_CELL = "LogCell"
+
+
+//DisPatch Queue
+let REALM_QUEUE = DispatchQueue(label: "realmQueue")

@@ -57,7 +57,7 @@ class CurrentRunVC: LocationVC , UIGestureRecognizerDelegate {
     }
     func endRun(){
         manager?.stopUpdatingLocation()
-        // here it goes the Realm code
+        Run.addRunTORealm(pace: pace, distacne: runDistance, duration: counter)
     }
     func startTimer(){
         durationLbl.text = counter.formatingTimeSecondsToHours()
