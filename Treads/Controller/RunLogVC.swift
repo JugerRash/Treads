@@ -30,11 +30,15 @@ extension RunLogVC : UITableViewDelegate , UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return Run.getAllRuns()?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: LOG_CELL , for: indexPath) as? LogCell {
+            guard let run = Run.getAllRuns()?[indexPath.row] else {
+                return LogCell()
+            }
+            cell.configureCell(run: run)
             return cell
         }else {
             return LogCell()

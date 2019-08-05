@@ -331,6 +331,12 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="avgPaceLbl" destination="ZsD-aE-qF1" id="NIX-WL-sWy"/>
+                                            <outlet property="runDateLbl" destination="Qqg-sN-BTq" id="bbA-pI-1iL"/>
+                                            <outlet property="runDistanceLbl" destination="U7b-Xf-gAj" id="jZz-mi-9k9"/>
+                                            <outlet property="runTimeLbl" destination="EoT-bQ-t8T" id="JaM-d4-LtM"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
