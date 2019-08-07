@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import RealmSwift
 
 class BeginRunVC: LocationVC {
 
@@ -23,8 +24,6 @@ class BeginRunVC: LocationVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         checkLocationAuthStatus()
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,14 +44,36 @@ class BeginRunVC: LocationVC {
 
     // Actions -:
     @IBAction func centerUserLocationBtnPressed(_ sender: Any) {
+        centerMapOnUserLocation()
     }
     @IBAction func closeLastRunViewpressed(_ sender: Any) {
         lastRunBGView.isHidden = true
         lastRunStackView.isHidden = true
         lastRunCloseBtn.isHidden = true
+        centerMapOnUserLocation()
     }
     
     //Functions -:
+    func centerMapOnPreRoute(locations : List<Location>) -> MKCoordinateRegion {
+        guard let initialCoordinate = locations.first else { return MKCoordinateRegion()}
+        var minLat = initialCoordinate.latitude
+        var minLng = initialCoordinate.longitude
+        var maxLat = initialCoordinate.latitude
+        var maxLng = initialCoordinate.longitude
+        
+        for location in locations {
+            minLat = min(minLat , location.latitude)
+            minLng = min(minLng , location.longitude)
+            maxLat = max(maxLat , location.latitude)
+            maxLng = max(maxLng , location.longitude)
+        }
+        return MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: (minLat + maxLat) / 2, longitude: (minLng + maxLng) / 2 ), span: MKCoordinateSpan(latitudeDelta: (maxLat - minLat) * 1.4, longitudeDelta: (maxLng - minLng) * 1.4))
+    }
+    func centerMapOnUserLocation() {
+        mapView.userTrackingMode = .follow
+        let coordinateRegion = MKCoordinateRegion.init(center: mapView.userLocation.coordinate, latitudinalMeters: RADIUS, longitudinalMeters: RADIUS)
+        mapView.setRegion(coordinateRegion, animated: true)
+    }
     func setUpMapView(){
         if let overlay = addLastRunToMap() {
             if mapView.overlays.count > 0 {
@@ -66,6 +87,7 @@ class BeginRunVC: LocationVC {
             lastRunBGView.isHidden = true
             lastRunStackView.isHidden = true
             lastRunCloseBtn.isHidden = true
+            centerMapOnUserLocation()
         }
     }
     func addLastRunToMap() -> MKPolyline? {
@@ -80,6 +102,15 @@ class BeginRunVC: LocationVC {
         for location in lastRun.locations {
             coordinate.append(CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
         }
+        
+        mapView.userTrackingMode = .none
+        mapView.setRegion(centerMapOnPreRoute(locations: lastRun.locations), animated: true)
+        
+        //the following code is for just fetching and object of type Run by id
+//        guard let locations = Run.getRun(byId: lastRun.id)?.locations else { return MKPolyline()}
+//        mapView.setRegion(centerMapOnPreRoute(locations: locations), animated: true)
+       // return MKPolyline(coordinates: coordinate, count: locations )
+        
         return MKPolyline(coordinates: coordinate, count: lastRun.locations.count)
     }
     func getLastRun(){
@@ -105,7 +136,7 @@ extension BeginRunVC : CLLocationManagerDelegate {
         if status == .authorizedWhenInUse {
             checkLocationAuthStatus()
             mapView.showsUserLocation = true
-            mapView.userTrackingMode = .follow // this to follow the user location without addin a radius or region .....
+            // mapView.userTrackingMode = .follow // this to follow the user location without addin a radius or region .....
         }
     }
     

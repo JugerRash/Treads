@@ -64,4 +64,17 @@ class Run : Object { //When you use realm you have to inherit from Object and u 
         
     }
     
+    //this function just to fetch a run from data base by id 
+    static func getRun(byId id : String) -> Run? {
+        do {
+            let realm = try Realm(configuration: RealmConfig.runDataConfig)
+            let run = realm.object(ofType: Run.self, forPrimaryKey: id)
+            return run
+        } catch {
+            debugPrint("Error couldn't fetch data by id ")
+            return nil
+        }
+    }
+    
+    
 }

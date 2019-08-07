@@ -65,7 +65,7 @@ class CurrentRunVC: LocationVC , UIGestureRecognizerDelegate {
     func startTimer(){
         durationLbl.text = counter.formatingTimeSecondsToHours()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCounter), userInfo: nil, repeats: true)
-    }
+    }	
     @objc func timeCounter(){
         counter += 1
         durationLbl.text = counter.formatingTimeSecondsToHours()
