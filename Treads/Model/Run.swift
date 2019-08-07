@@ -15,6 +15,7 @@ class Run : Object { //When you use realm you have to inherit from Object and u 
     @objc dynamic public private(set) var pace = 0
     @objc dynamic public private(set) var distance = 0.0
     @objc dynamic public private(set) var duration = 0
+    public private(set) var locations = List<Location>()
     // notice we added to our variables @objc to be readable by the swift 4
     
     override class func primaryKey() -> String { // every obeject has a primaryKey and it's unique
@@ -25,21 +26,22 @@ class Run : Object { //When you use realm you have to inherit from Object and u 
         return ["pace" , "date" , "duration"]
     }
     
-    convenience init(pace : Int , distance : Double , duration : Int) {
+    convenience init(pace : Int , distance : Double , duration : Int , locations : List<Location>) {
         self.init()
         self.id = UUID().uuidString.lowercased()
         self.date = NSDate()
         self.pace = pace
         self.distance = distance
         self.duration = duration
+        self.locations = locations
     }
     
     
-    static func addRunTORealm(pace : Int , distacne : Double , duration : Int) {
+    static func addRunTORealm(pace : Int , distacne : Double , duration : Int , locations : List<Location>) {
         REALM_QUEUE.sync {
-            let run = Run(pace: pace, distance: distacne, duration: duration)
+            let run = Run(pace: pace, distance: distacne, duration: duration , locations: locations)
             do {
-                let realm = try Realm()
+                let realm = try Realm(configuration: RealmConfig.runDataConfig)
                 try realm.write {
                     realm.add(run)
                     try realm.commitWrite()// this one just for safety and it's good to have it
@@ -52,7 +54,7 @@ class Run : Object { //When you use realm you have to inherit from Object and u 
     
     static func getAllRuns() -> Results<Run>? { // the Results its the same as the dicitionary and it's not orederd and it has to be optional cuz we are getting data from realm 
         do {
-            let realm = try Realm()
+            let realm = try Realm(configuration: RealmConfig.runDataConfig)
             var runs = realm.objects(Run.self)
             runs = runs.sorted(byKeyPath: "date", ascending: false)
             return runs

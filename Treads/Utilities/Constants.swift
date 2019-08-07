@@ -15,3 +15,4 @@ let LOG_CELL = "LogCell"
 
 //DisPatch Queue
 let REALM_QUEUE = DispatchQueue(label: "realmQueue")
+let REALM_RUN_CONFIG = "realmRunConfig"
